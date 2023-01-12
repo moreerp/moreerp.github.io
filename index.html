@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/versions/2.21.4/sdk.js"></script>
+<!--    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!--    <script src="/static/js/line_liff.js?cache=123456"></script>-->
+    <link rel="shortcut icon" href="/static/img/favicon.ico">
+    <meta charset="UTF-8">
+    <title>MyAPP</title>
+</head>
+<body>
+    <script>
+        async function getUserProfile() {
+            const profile = await liff.getProfile();
+            $("#userId").html(profile.userId);
+            $("#displayName").html(profile.displayName);
+            $("#statusMessage").html(profile.statusMessage);
+            $("#pictureUrl").html("<img src='"+profile.pictureUrl+"'/>");
+        }
+
+        async function line_init(){
+            await liff.init({ liffId: "1599769198-yldV7xRg", withLoginOnExternalBrowser: true });
+            console.log(" -------line init----------");
+            if (liff.isLoggedIn()){
+                getUserProfile();
+            }
+        }
+        line_init();
+    </script>
+    <h1 class="text-center">Welcome to MyApp</h1>
+    <h2 class="text-center">Test auto login</h2>
+    <div class="text-center" name="userId" id="userId" ></div>
+    <div class="text-center" name="displayName" id="displayName" ></div>
+    <div class="text-center" name="statusMessage" id="statusMessage" ></div>
+    <div class="text-center" name="pictureUrl" id="pictureUrl" ></div>
+</body>
+</html>
